@@ -2,7 +2,7 @@ import requests
 import xmltodict
 
 
-api_url = 'http://api.filmtotaal.nl/filmsoptv.xml?apikey=3yakjh3yeghyppmgt99azqkfjjfrundg&dag=25-10-2016&sorteer=0'
+api_url = 'http://api.filmtotaal.nl/filmsoptv.xml?apikey=3yakjh3yeghyppmgt99azqkfjjfrundg&dag=26-10-2016&sorteer=0'
 response = requests.get(api_url)
 
 
@@ -20,4 +20,4 @@ for films in filmsXML['filmsoptv']['film']:
     cover = films['cover']
 
 
-    print(film + ' ' + jaar)
+    print('{} ({})'.format(film, jaar))
