@@ -24,3 +24,5 @@ def startmenu():
     root.mainloop()
 
 startmenu()
+
+print('rrrr')
