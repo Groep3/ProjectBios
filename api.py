@@ -19,5 +19,4 @@ for films in filmsXML['filmsoptv']['film']:
     land = films['land']
     cover = films['cover']
 
-
     print('{} ({})'.format(film, jaar))
