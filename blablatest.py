@@ -25,4 +25,4 @@ def startmenu():
 
 startmenu()
 
-print('rnrr')
+print('rddnrr')
