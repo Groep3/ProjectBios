@@ -1,5 +1,14 @@
 from tkinter import *
 from filmtotaaltoday import *
+import csv
+
+with open('bezoekers.csv', 'r+') as bezoekerscsv:
+    writer = csv.writer(bezoekerscsv, delimiter=';')
+    writer.writerow(('naam', 'wachtwoord'))
+
+with open('aanbieders.csv', 'r+') as bezoekerscsv:
+    writer = csv.writer(bezoekerscsv, delimiter=';')
+
 
 value = 'film'
 def combine_funcs(*funcs):
@@ -101,7 +110,8 @@ def aanbiedersmenu_openen():
         def volgende_aanbiedersmenu_sluiten():
             volgende_aanbiedersmenuscherm.withdraw()
 
-
+        gebruiker = Label(master=volgende_aanbiedersmenuscherm,text=naam_invullen.get())
+        gebruiker.pack()
 
         overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='overzicht van nog niet aangeboden films door een ander aanbieder')
         overzicht_van_nog_niet_aangeboden_films.pack()
