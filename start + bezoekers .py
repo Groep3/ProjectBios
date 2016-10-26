@@ -45,7 +45,8 @@ def bezoekersmenu_openen():
 
         label = Label(master=ticket, text=('code:\n{}'.format(createqr())))
         label.pack()
-
+        
+        photo = PhotoImage(file = "qrcode.png")
         qrlabel = Label(master=ticket, image=photo)
         qrlabel.image = photo
         qrlabel.pack()
