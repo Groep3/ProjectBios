@@ -1,7 +1,9 @@
-def filmtotaal():
+def filmtotaaltoday():
     import requests
     import xmltodict
-    api_url = 'http://api.filmtotaal.nl/filmsoptv.xml?apikey=3yakjh3yeghyppmgt99azqkfjjfrundg&dag=26-10-2016&sorteer=0'
+    import time
+    date = time.strftime('%d-%m-%Y', time.localtime())
+    api_url = 'http://api.filmtotaal.nl/filmsoptv.xml?apikey=3yakjh3yeghyppmgt99azqkfjjfrundg&dag='+date+'&sorteer=0'
     response = requests.get(api_url)
     filmsXML = xmltodict.parse(response.text)
 
