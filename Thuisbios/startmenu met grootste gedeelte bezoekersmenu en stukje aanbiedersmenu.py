@@ -1,7 +1,6 @@
-import csv
 from tkinter import *
-
-from Thuisbios.filmtotaaltoday import *
+from filmtotaaltoday import *
+import csv
 
 with open('bezoekers.csv', 'r+') as bezoekerscsv:
     writer = csv.writer(bezoekerscsv, delimiter=';')
@@ -173,10 +172,14 @@ def aanbiedersmenu_openen():
     wachtwoord_invullen.pack(padx=10, pady=10)
 
     submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(volgende_aanbiedersmenu,aanbiedersmenu_sluiten)) #naar volgende menu
-    submit.pack(padx=20, pady=20)
+    submit.pack(side=RIGHT)
+
+    terug = Button(master=aanbiedersmenuscherm, text="return", command=venster_afsluiten)
+    terug.pack(side=LEFT, pady=20)
+
 
     afsluiten = Button(master=aanbiedersmenuscherm, text="afsluiten", command=aanbiedersmenu_sluiten)
-    afsluiten.pack(padx=20, pady=20)
+    afsluiten.pack(pady=20)
 
 
 startscherm = Tk()
@@ -191,7 +194,8 @@ aanbieder.pack(padx=10, pady=10)
 bezoeker = Button(master=startscherm, text="inloggen als bezoeker", command=combine_funcs(venster_afsluiten, bezoekersmenu_openen))
 bezoeker.pack(padx=10, pady=10)
 
+
 afsluiten = Button(master=startscherm, text="afsluiten", command=venster_afsluiten)
-afsluiten.pack(padx=20, pady=20)
+afsluiten.pack(side=BOTTOM)
 
 startscherm.mainloop()

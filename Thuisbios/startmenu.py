@@ -21,17 +21,14 @@ def venster_afsluiten():
 
     startscherm.withdraw()
 
+
 def bezoekersmenu_openen():
     def bezoekersmenu_sluiten():
        bezoekersmenuscherm.withdraw()
-    def aanbieders():
-        aanbiedersscherm = Toplevel(bezoekersmenuscherm)
-        aanbiedersscherm.title('aanbieders')
-
-        label = Label(master=aanbiedersscherm, text='aanbieders:')
-        label.pack()
 
     def volgende():
+        def volgende_afsluiten():
+            ticket.withdraw()
         photo = PhotoImage(file = "qrcode.png")
         ticket = Toplevel(bezoekersmenuscherm)
         ticket.title('ticket')
@@ -58,6 +55,12 @@ def bezoekersmenu_openen():
         qrlabel = Label(master=ticket, image=photo)
         qrlabel.image = photo
         qrlabel.pack()
+
+        terug = Button(master=ticket, text="return", command=combine_funcs(bezoekersmenu_openen))
+        terug.pack(side=LEFT, pady=20)
+
+        afsluiten = Button(master=ticket, text="afsluiten", command=volgende_afsluiten)
+        afsluiten.pack(side=RIGHT)
 
     bezoekersmenuscherm = Toplevel(startscherm)
     bezoekersmenuscherm.title('Bezoekersmenu')
@@ -93,11 +96,14 @@ def bezoekersmenu_openen():
     selectButton = Button(master=bezoekersmenuscherm, text='Select', underline = 0,command=selection)
     selectButton.pack(padx=10, pady=5)
 
-    submit = Button(master=bezoekersmenuscherm, text='Submit',command=combine_funcs(volgende, bezoekersmenu_sluiten)) #command toevoegen
-    submit.pack(padx=20, pady=40)
+    submit = Button(master=bezoekersmenuscherm, text='Submit',command=combine_funcs(volgende, bezoekersmenu_sluiten))
+    submit.pack(side=RIGHT, pady=40)
+
+    terug = Button(master=bezoekersmenuscherm, text="return", command=combine_funcs(bezoekersmenu_sluiten)) #nieuwe functie toevoegen?
+    terug.pack(side=LEFT, pady=20)
 
     afsluiten = Button(master=bezoekersmenuscherm, text="Afsluiten", command=bezoekersmenu_sluiten)
-    afsluiten.pack(padx=20, pady=20)
+    afsluiten.pack(side=BOTTOM, pady=20)
 
 
 def aanbiedersmenu_openen():
@@ -157,8 +163,11 @@ def aanbiedersmenu_openen():
 
         #begintijd - naam sorteren
 
+        terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
+        terug.pack(side=LEFT)
+
         afsluiten = Button(master=volgende_aanbiedersmenuscherm, text="Afsluiten", command=volgende_aanbiedersmenu_sluiten)
-        afsluiten.pack(padx=20, pady=20)
+        afsluiten.pack(side=RIGHT)
 
     aanbiedersmenuscherm = Toplevel(startscherm)
     aanbiedersmenuscherm.title('Aanbiedersmenu')
@@ -175,12 +184,15 @@ def aanbiedersmenu_openen():
     wachtwoord_invullen = Entry(master=aanbiedersmenuscherm)
     wachtwoord_invullen.pack(padx=10, pady=10)
 
-    submit = Button(master=aanbiedersmenuscherm, text="Submit", command=combine_funcs(volgende_aanbiedersmenu,aanbiedersmenu_sluiten)) #naar volgende menu
-    submit.pack(padx=20, pady=20)
+    submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(volgende_aanbiedersmenu,aanbiedersmenu_sluiten)) #naar volgende menu
+    submit.pack(side=RIGHT)
 
-    afsluiten = Button(master=aanbiedersmenuscherm, text="Afsluiten", command=aanbiedersmenu_sluiten)
-    afsluiten.pack(padx=20, pady=20)
+    terug = Button(master=aanbiedersmenuscherm, text="return", command=venster_openen) # nieuwe functie toevoegen?
+    terug.pack(side=LEFT, pady=20)
 
+
+    afsluiten = Button(master=aanbiedersmenuscherm, text="afsluiten", command=aanbiedersmenu_sluiten)
+    afsluiten.pack(pady=20)
 
 startscherm = Tk()
 
@@ -198,5 +210,3 @@ afsluiten = Button(master=startscherm, text="Afsluiten", command=venster_afsluit
 afsluiten.pack(padx=20, pady=20)
 
 startscherm.mainloop()
-
-
