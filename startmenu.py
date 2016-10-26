@@ -1,52 +1,53 @@
 from tkinter import *
-def startmenu():
-    root.withdraw()
 
-    def volgende():
-        window2.withdraw()
-    window2 = Toplevel(master=root)
-    label = Label(master=window2, text='ticket:')
-    label.pack()
+def combine_funcs(*funcs):
+    def combined_func(*args, **kwargs):
+        for f in funcs:
+            f(*args, **kwargs)
+    return combined_func
 
-    label = Label(master=window2, text=entry.get())
-    label.pack()
+def venster_afsluiten():
 
-    label = Label(master=window2, text=entry2.get())
-    label.pack()
+    startscherm.withdraw()
 
-    label = Label(master=window2, text='film:')
-    label.pack()
+def bezoekersmenu_openen():
+    def bezoekersmenu_sluiten():
+        bezoekersmenuscherm.withdraw()
+    bezoekersmenuscherm = Toplevel(startscherm)
+    bezoekersmenuscherm.title('bezoekersmenu')
+    afsluiten = Button(master=bezoekersmenuscherm, text="afsluiten", command=bezoekersmenu_sluiten)
+    afsluiten.pack(padx=20, pady=20)
 
-    button1 = Button(master=window2, text='afsluiten', command=volgende)
-    button1.pack(padx=10, pady=10)
 
-root = Tk()
 
-label = Label(master=root, text='startmenu')
+
+def aanbiedersmenu_openen():
+    def aanbiedersmenu_sluiten():
+        aanbiedersmenuscherm.withdraw()
+    aanbiedersmenuscherm = Toplevel(startscherm)
+    aanbiedersmenuscherm.title('aanbiedersmenu')
+    afsluiten = Button(master=aanbiedersmenuscherm, text="afsluiten", command=aanbiedersmenu_sluiten)
+    afsluiten.pack(padx=20, pady=20)
+
+
+startscherm = Tk()
+
+
+
+
+
+label = Label(master=startscherm, text='inlogscherm', height=2)
 label.pack()
 
-label = Label(master=root,text='naam')
-label.pack()
+aanbieder = Button(master=startscherm, text="inloggen als aanbieder", command=combine_funcs(venster_afsluiten, aanbiedersmenu_openen))
+aanbieder.pack(padx=10, pady=10)
 
-entry = Entry(master=root)
-entry.pack(padx=10, pady=10)
+bezoeker = Button(master=startscherm, text="inloggen als bezoeker", command=combine_funcs(venster_afsluiten, bezoekersmenu_openen))
+bezoeker.pack(padx=10, pady=10)
 
-label = Label(master=root,text='mailadres')
-label.pack()
+afsluiten = Button(master=startscherm, text="afsluiten", command=venster_afsluiten)
+afsluiten.pack(padx=20, pady=20)
 
-entry2 = Entry(master=root)
-entry2.pack(padx=10, pady=10)
 
-label = Label(master=root,text='opties aanbieder')
-label.pack()
 
-label = Label(master=root,text='opties voor films')
-label.pack()
-
-button1 = Button(master=root, text='Submit', command=startmenu)
-button1.pack(pady=10)
-
-root.mainloop()
-
-startmenu()
-
+startscherm.mainloop()
