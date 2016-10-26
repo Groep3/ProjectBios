@@ -1,8 +1,6 @@
 import csv
 from tkinter import *
-
 from qrcode import *
-
 from Thuisbios.filmtotaaltoday import *
 
 with open('bezoekers.csv', 'r+') as bezoekerscsv:
@@ -38,22 +36,22 @@ def bezoekersmenu_openen():
         ticket = Toplevel(bezoekersmenuscherm)
         ticket.title('ticket')
 
-        label = Label(master=ticket, text='ticket')
+        label = Label(master=ticket, text='Ticket')
         label.pack()
 
         label = Label(master=ticket, text=('Naam:\n {}'.format(naam_invullen.get())))
         label.pack()
 
-        label = Label(master=ticket, text=('Mailadress:\n {}'.format(mail_invullen.get())))
+        label = Label(master=ticket, text=('Uw E-mail:\n {}'.format(mail_invullen.get())))
         label.pack()
 
-        label = Label(master=ticket, text=('film:\n{}'.format(value)))
+        label = Label(master=ticket, text=('Film:\n{}'.format(value)))
         label.pack()
 
-        label = Label(master=ticket, text='noteer de volgende code of scan de qr code')
+        label = Label(master=ticket, text='Dit is uw persoonlijke code en qr code:')
         label.pack()
 
-        label = Label(master=ticket, text=('code:\n{}'.format(createqr())))
+        label = Label(master=ticket, text=('Code:\n{}'.format(createqr())))
         label.pack()
 
         photo = PhotoImage(file = "qrcode.png")
@@ -62,20 +60,20 @@ def bezoekersmenu_openen():
         qrlabel.pack()
 
     bezoekersmenuscherm = Toplevel(startscherm)
-    bezoekersmenuscherm.title('bezoekersmenu')
-    naam = Label(master=bezoekersmenuscherm,text='naam')
+    bezoekersmenuscherm.title('Bezoekersmenu')
+    naam = Label(master=bezoekersmenuscherm,text='Naam')
     naam.pack()
 
     naam_invullen = Entry(master=bezoekersmenuscherm)
     naam_invullen.pack(padx=10, pady=10)
 
-    mailadres = Label(master=bezoekersmenuscherm,text='mailadres')
+    mailadres = Label(master=bezoekersmenuscherm,text='E-mail')
     mailadres.pack()
 
     mail_invullen = Entry(master=bezoekersmenuscherm)
     mail_invullen.pack(padx=10, pady=10)
 
-    opties_aanbieder = Label(master=bezoekersmenuscherm,text='filmkeuze')
+    opties_aanbieder = Label(master=bezoekersmenuscherm,text='Filmkeuze')
     opties_aanbieder.pack()
 
     def selection():
@@ -98,7 +96,7 @@ def bezoekersmenu_openen():
     submit = Button(master=bezoekersmenuscherm, text='Submit',command=combine_funcs(volgende, bezoekersmenu_sluiten)) #command toevoegen
     submit.pack(padx=20, pady=40)
 
-    afsluiten = Button(master=bezoekersmenuscherm, text="afsluiten", command=bezoekersmenu_sluiten)
+    afsluiten = Button(master=bezoekersmenuscherm, text="Afsluiten", command=bezoekersmenu_sluiten)
     afsluiten.pack(padx=20, pady=20)
 
 
@@ -107,14 +105,14 @@ def aanbiedersmenu_openen():
         aanbiedersmenuscherm.withdraw()
     def volgende_aanbiedersmenu():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
-        volgende_aanbiedersmenuscherm.title('overzicht van gegevens')
+        volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
         def volgende_aanbiedersmenu_sluiten():
             volgende_aanbiedersmenuscherm.withdraw()
 
         gebruiker = Label(master=volgende_aanbiedersmenuscherm,text=naam_invullen.get())
         gebruiker.pack()
 
-        overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='overzicht van nog niet aangeboden films door een ander aanbieder')
+        overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
         overzicht_van_nog_niet_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
@@ -128,7 +126,7 @@ def aanbiedersmenu_openen():
 
         #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
-        overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='overzicht van jouw aangeboden films')
+        overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw aangeboden films')
         overzicht_van_jouw_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
@@ -142,7 +140,7 @@ def aanbiedersmenu_openen():
 
         #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
-        overzicht_van_jouw_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='overzicht van jouw bezoekers')
+        overzicht_van_jouw_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw bezoekers')
         overzicht_van_jouw_bezoekers.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
@@ -151,7 +149,7 @@ def aanbiedersmenu_openen():
         #jouw bezoekers
 
 
-        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='aanmeldcodes van bezoekers')
+        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
         aanmeldcode_bezoekers.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
@@ -159,44 +157,44 @@ def aanbiedersmenu_openen():
 
         #begintijd - naam sorteren
 
-        afsluiten = Button(master=volgende_aanbiedersmenuscherm, text="afsluiten", command=volgende_aanbiedersmenu_sluiten)
+        afsluiten = Button(master=volgende_aanbiedersmenuscherm, text="Afsluiten", command=volgende_aanbiedersmenu_sluiten)
         afsluiten.pack(padx=20, pady=20)
 
     aanbiedersmenuscherm = Toplevel(startscherm)
-    aanbiedersmenuscherm.title('aanbiedersmenu')
+    aanbiedersmenuscherm.title('Aanbiedersmenu')
 
-    gebruikersnaam = Label(master=aanbiedersmenuscherm,text='gebruikersnaam')
+    gebruikersnaam = Label(master=aanbiedersmenuscherm,text='Gebruikersnaam')
     gebruikersnaam.pack()
 
     naam_invullen = Entry(master=aanbiedersmenuscherm)
     naam_invullen.pack(padx=10, pady=10)
 
-    wachtwoord = Label(master=aanbiedersmenuscherm,text='wachtwoord')
+    wachtwoord = Label(master=aanbiedersmenuscherm,text='Wachtwoord')
     wachtwoord.pack()
 
     wachtwoord_invullen = Entry(master=aanbiedersmenuscherm)
     wachtwoord_invullen.pack(padx=10, pady=10)
 
-    submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(volgende_aanbiedersmenu,aanbiedersmenu_sluiten)) #naar volgende menu
+    submit = Button(master=aanbiedersmenuscherm, text="Submit", command=combine_funcs(volgende_aanbiedersmenu,aanbiedersmenu_sluiten)) #naar volgende menu
     submit.pack(padx=20, pady=20)
 
-    afsluiten = Button(master=aanbiedersmenuscherm, text="afsluiten", command=aanbiedersmenu_sluiten)
+    afsluiten = Button(master=aanbiedersmenuscherm, text="Afsluiten", command=aanbiedersmenu_sluiten)
     afsluiten.pack(padx=20, pady=20)
 
 
 startscherm = Tk()
 
 
-label = Label(master=startscherm, text='inlogscherm', height=2)
+label = Label(master=startscherm, text='Inlogscherm', height=2)
 label.pack()
 
-aanbieder = Button(master=startscherm, text="inloggen als aanbieder", command=combine_funcs(venster_afsluiten, aanbiedersmenu_openen))
+aanbieder = Button(master=startscherm, text="Inloggen als aanbieder", command=combine_funcs(venster_afsluiten, aanbiedersmenu_openen))
 aanbieder.pack(padx=10, pady=10)
 
-bezoeker = Button(master=startscherm, text="inloggen als bezoeker", command=combine_funcs(venster_afsluiten, bezoekersmenu_openen))
+bezoeker = Button(master=startscherm, text="Inloggen als bezoeker", command=combine_funcs(venster_afsluiten, bezoekersmenu_openen))
 bezoeker.pack(padx=10, pady=10)
 
-afsluiten = Button(master=startscherm, text="afsluiten", command=venster_afsluiten)
+afsluiten = Button(master=startscherm, text="Afsluiten", command=venster_afsluiten)
 afsluiten.pack(padx=20, pady=20)
 
 startscherm.mainloop()
