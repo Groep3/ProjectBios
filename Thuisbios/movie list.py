@@ -1,5 +1,5 @@
 from tkinter import *
-from filmtotaaltoday import *
+
 
 def selection():
     a = lb1.selection_get()
