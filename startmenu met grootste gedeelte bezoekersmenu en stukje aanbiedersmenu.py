@@ -22,13 +22,6 @@ def bezoekersmenu_openen():
         label = Label(master=aanbiedersscherm, text='aanbieders:')
         label.pack()
 
-    def filmopties():
-        films = Toplevel(bezoekersmenuscherm)
-        films.title('opties voor films')
-
-        label = Label(master=films, text='films:')
-        label.pack()
-
     def volgende():
         ticket = Toplevel(bezoekersmenuscherm)
         ticket.title('ticket')
@@ -112,22 +105,46 @@ def aanbiedersmenu_openen():
 
         overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='overzicht van nog niet aangeboden films door een ander aanbieder')
         overzicht_van_nog_niet_aangeboden_films.pack()
+        
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
 
-        #alle films die nog niet worden aangeboden door aanbieders
+        #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
         overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='overzicht van jouw aangeboden films')
         overzicht_van_jouw_aangeboden_films.pack()
+        
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
 
-        #alle films die je aanbiedt
+        #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
         overzicht_van_jouw_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='overzicht van jouw bezoekers')
         overzicht_van_jouw_bezoekers.pack()
+        
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
 
         #jouw bezoekers
 
 
         aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='aanmeldcodes van bezoekers')
         aanmeldcode_bezoekers.pack()
+        
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
 
         #begintijd - naam sorteren
 
