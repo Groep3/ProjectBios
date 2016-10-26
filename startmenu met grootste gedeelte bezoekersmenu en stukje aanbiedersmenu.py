@@ -6,6 +6,8 @@ with open('bezoekers.csv', 'r+') as bezoekerscsv:
     writer = csv.writer(bezoekerscsv, delimiter=';')
     writer.writerow(('naam', 'wachtwoord'))
 
+
+
 with open('aanbieders.csv', 'r+') as bezoekerscsv:
     writer = csv.writer(bezoekerscsv, delimiter=';')
 
@@ -24,12 +26,6 @@ def venster_afsluiten():
 def bezoekersmenu_openen():
     def bezoekersmenu_sluiten():
        bezoekersmenuscherm.withdraw()
-    def aanbieders():
-        aanbiedersscherm = Toplevel(bezoekersmenuscherm)
-        aanbiedersscherm.title('aanbieders')
-
-        label = Label(master=aanbiedersscherm, text='aanbieders:')
-        label.pack()
 
     def volgende():
         ticket = Toplevel(bezoekersmenuscherm)
@@ -57,6 +53,7 @@ def bezoekersmenu_openen():
         label.pack()
 
 
+
     bezoekersmenuscherm = Toplevel(startscherm)
     bezoekersmenuscherm.title('bezoekersmenu')
     naam = Label(master=bezoekersmenuscherm,text='naam')
@@ -73,6 +70,7 @@ def bezoekersmenu_openen():
 
     opties_aanbieder = Label(master=bezoekersmenuscherm,text='filmkeuze')
     opties_aanbieder.pack()
+
 
     def selection():
         global value
@@ -93,9 +91,6 @@ def bezoekersmenu_openen():
 
     submit = Button(master=bezoekersmenuscherm, text='Submit',command=combine_funcs(volgende, bezoekersmenu_sluiten)) #command toevoegen
     submit.pack(padx=20, pady=40)
-
-
-
 
     afsluiten = Button(master=bezoekersmenuscherm, text="afsluiten", command=bezoekersmenu_sluiten)
     afsluiten.pack(padx=20, pady=20)
@@ -197,6 +192,5 @@ bezoeker.pack(padx=10, pady=10)
 
 afsluiten = Button(master=startscherm, text="afsluiten", command=venster_afsluiten)
 afsluiten.pack(padx=20, pady=20)
-
 
 startscherm.mainloop()
