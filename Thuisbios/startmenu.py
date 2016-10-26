@@ -56,7 +56,7 @@ def bezoekersmenu_openen():
         qrlabel.image = photo
         qrlabel.pack()
 
-        terug = Button(master=ticket, text="return", command=combine_funcs(bezoekersmenu_openen))
+        terug = Button(master=ticket, text="return", command=combine_funcs(bezoekersmenu_openen, volgende_afsluiten))
         terug.pack(side=LEFT, pady=20)
 
         afsluiten = Button(master=ticket, text="afsluiten", command=volgende_afsluiten)
