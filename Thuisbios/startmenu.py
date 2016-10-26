@@ -187,7 +187,7 @@ def aanbiedersmenu_openen():
     submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(volgende_aanbiedersmenu,aanbiedersmenu_sluiten)) #naar volgende menu
     submit.pack(side=RIGHT)
 
-    terug = Button(master=aanbiedersmenuscherm, text="return", command='') # nieuwe functie toevoegen?
+    terug = Button(master=aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_sluiten)) # nieuwe functie toevoegen?
     terug.pack(side=LEFT, pady=20)
 
 
