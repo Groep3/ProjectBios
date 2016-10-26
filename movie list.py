@@ -1,13 +1,11 @@
 from tkinter import *
-from filmtotaal import *
+from filmtotaaltoday import *
 
 def selection():
     a = lb1.selection_get()
     print(a)
 
 root = Tk()
-frame = Frame(root)
-frame.pack()
 
 
 lb1 = Listbox(master=root, width=50, height=10)
@@ -19,7 +17,7 @@ while place < len(filmtotaal()):
     a= a+1
 lb1.pack()
 
-selectButton = Button(frame, text='Select', underline = 0,command=selection)
+selectButton = Button(root, text='Select', underline = 0,command=selection)
 selectButton.pack()
 
 root.bind('<Double-1>', lambda x: selectButton.invoke())
