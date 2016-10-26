@@ -22,13 +22,6 @@ def bezoekersmenu_openen():
         label = Label(master=aanbiedersscherm, text='aanbieders:')
         label.pack()
 
-    def filmopties():
-        films = Toplevel(bezoekersmenuscherm)
-        films.title('opties voor films')
-
-        label = Label(master=films, text='films:')
-        label.pack()
-
     def volgende():
         ticket = Toplevel(bezoekersmenuscherm)
         ticket.title('ticket')
@@ -140,12 +133,18 @@ def aanbiedersmenu_openen():
 
         overzicht_van_jouw_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='overzicht van jouw bezoekers')
         overzicht_van_jouw_bezoekers.pack()
+        
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
 
         #jouw bezoekers
 
 
         aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='aanmeldcodes van bezoekers')
         aanmeldcode_bezoekers.pack()
+        
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
 
         #begintijd - naam sorteren
 
