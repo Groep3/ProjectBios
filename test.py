@@ -39,7 +39,7 @@ def bezoekersmenu_openen():
         label = Label(master=ticket, text=('Naam:\n {}'.format(naam_invullen.get())))
         label.pack()
 
-        label = Label(master=ticket, text=('Mailadres:\n {}'.format(mail_invullen.get())))
+        label = Label(master=ticket, text=('Mailadress:\n {}'.format(mail_invullen.get())))
         label.pack()
 
         label = Label(master=ticket, text=('film:\n{}'.format(value)))
