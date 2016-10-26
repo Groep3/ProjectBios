@@ -1,5 +1,6 @@
 from tkinter import *
 from filmtotaaltoday import *
+from qrcode import *
 
 value = 'film'
 def combine_funcs(*funcs):
@@ -22,14 +23,8 @@ def bezoekersmenu_openen():
         label = Label(master=aanbiedersscherm, text='aanbieders:')
         label.pack()
 
-    def filmopties():
-        films = Toplevel(bezoekersmenuscherm)
-        films.title('opties voor films')
-
-        label = Label(master=films, text='films:')
-        label.pack()
-
     def volgende():
+        photo = PhotoImage(file = "qrcode.png")
         ticket = Toplevel(bezoekersmenuscherm)
         ticket.title('ticket')
 
@@ -45,14 +40,16 @@ def bezoekersmenu_openen():
         label = Label(master=ticket, text=('film:\n{}'.format(value)))
         label.pack()
 
-        label = Label(master=ticket, text='code:')
+        label = Label(master=ticket, text='noteer de volgende code of scan de qr code')
         label.pack()
 
-        label = Label(master=ticket, text='een idee voor een code?')
+        label = Label(master=ticket, text=('code:\n{}'.format(createqr())))
         label.pack()
 
-        label = Label(master=ticket, text='noteer de code')
-        label.pack()
+        qrlabel = Label(master=ticket, image=photo)
+        qrlabel.image = photo
+        qrlabel.pack()
+
 
 
     bezoekersmenuscherm = Toplevel(startscherm)
