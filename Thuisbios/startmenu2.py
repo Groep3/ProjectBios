@@ -210,7 +210,7 @@ def aanbiedersmenu_openen():
         overzicht_van_nog_niet_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        lst = lezen('C:/Users/slettebak/test2/thuisbios/mogelijke films/mogelijke films'+ ' '+date+'.csv')
+        lst = lezen('mogelijke films'+ ' '+date+'.csv')
         for line in lst:
             lb1.insert(0,line)
         lb1.pack()
@@ -221,7 +221,7 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        lst = lezen('C:/Users/slettebak/test2/thuisbios/Maarten/aanbiedingMaarten'+ ' '+date+'.csv')
+        lst = lezen('aanbiedingMaarten'+ ' '+date+'.csv')
         for line in lst:
             lb1.insert(0,line)
         lb1.pack()
@@ -232,7 +232,7 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_bezoekers.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        lst = lezen('C:/Users/slettebak/test2/thuisbios/Maarten/GastenMaarten'+ ' '+date+'.csv')
+        lst = lezen('GastenMaarten'+ ' '+date+'.csv')
         for line in lst:
             lb1.insert(0,line)
         lb1.pack()
