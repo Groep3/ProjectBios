@@ -222,7 +222,7 @@ def aanbiedersmenu_openen():
     wachtwoord = Label(master=aanbiedersmenuscherm,text='Wachtwoord')
     wachtwoord.pack()
 
-    wachtwoord_invullen = Entry(master=aanbiedersmenuscherm)
+    wachtwoord_invullen = Entry(master=aanbiedersmenuscherm, show="*")
     wachtwoord_invullen.pack(padx=10, pady=10)
 
     opmerking = Label(master=aanbiedersmenuscherm, text = "")
