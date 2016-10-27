@@ -21,6 +21,6 @@ def filmtotaaltoday():
         cover = films['cover']
 
         lst.append('{} ({})\n'.format(film, jaar))
-    schijven(lst,'mogelijke films'+ ' '+date+'.csv')
+    schijvenlijst(lst,'mogelijke films'+ ' '+date+'.csv')
 
 filmtotaaltoday()

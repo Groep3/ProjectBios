@@ -1,15 +1,15 @@
 from tkinter import *
 from lezenenschrijven import *
 from tkinter.messagebox import showinfo
+import time
 
+date = time.strftime('%d-%m-%Y', time.localtime())
 value = 'film'
 code = 0
 name = 0
 mail = 0
 
 def ticketsave():
-    import time
-    date = time.strftime('%d-%m-%Y', time.localtime())
     naam = name
     email = mail
     film = value
@@ -97,7 +97,7 @@ def bezoekersmenu_openen():
     def volgende():
         def volgende_afsluiten():
             ticket.withdraw()
-        photo = PhotoImage(file = "qrcode.png")
+
         ticket = Toplevel(bezoekersmenuscherm)
         ticket.title('ticket')
 
@@ -136,16 +136,12 @@ def bezoekersmenu_openen():
     naam.pack()
 
     naam_invullen = Entry(master=bezoekersmenuscherm)
-    global name
-    name = naam_invullen
     naam_invullen.pack(padx=10, pady=10)
 
     mailadres = Label(master=bezoekersmenuscherm,text='E-mail')
     mailadres.pack()
 
     mail_invullen = Entry(master=bezoekersmenuscherm)
-    global mail
-    mail = mail_invullen
     mail_invullen.pack(padx=10, pady=10)
 
     opties_aanbieder = Label(master=bezoekersmenuscherm,text='Filmkeuze')
@@ -181,11 +177,7 @@ def bezoekersmenu_openen():
 def aanbiedersmenu_openen():
     def aanbiedersmenu_sluiten():
         aanbiedersmenuscherm.withdraw()
-    def selection():
-        global value
-        value = lb1.selection_get()
-        return(value)
-          
+
     def inloggen():
         text = naam_invullen.get()
         wachtwoord = wachtwoord_invullen.get()
@@ -218,12 +210,9 @@ def aanbiedersmenu_openen():
         overzicht_van_nog_niet_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        lst = lezen('C:/Users/slettebak/test2/thuisbios/mogelijke films/mogelijke films'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
 
         #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
@@ -232,12 +221,9 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        lst = lezen('C:/Users/slettebak/test2/thuisbios/Maarten/aanbiedingMaarten'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
 
         #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
@@ -246,6 +232,9 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_bezoekers.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lst = lezen('C:/Users/slettebak/test2/thuisbios/Maarten/GastenMaarten'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
 
         #jouw bezoekers
@@ -520,19 +509,6 @@ def aanbiedersmenu_openen():
 
     wachtwoord_invullen = Entry(master=aanbiedersmenuscherm,show="*")
     wachtwoord_invullen.pack(padx=10, pady=10)
-
-    lb1 = Listbox(master=aanbiedersmenuscherm, width=50, height=10, selectmode=MULTIPLE)
-    place = 0
-    while place < len(filmtotaaltoday()):
-        indx = 1
-        lb1.insert(indx, filmtotaaltoday()[place])
-        place = place+1
-        indx = indx+1
-    lb1.pack()
-
-    selectButton = Button(master=aanbiedersmenuscherm, text='Select', underline = 0,command=selection)
-    selectButton.pack(padx=10, pady=5)
-
 
     submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(inloggen,aanbiedersmenu_sluiten)) #naar volgende menu
     submit.pack(side=RIGHT)
