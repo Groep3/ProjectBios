@@ -146,9 +146,8 @@ def aanbiedersmenu_openen():
             (volgende_aanbiedersmenu())
         elif text == "Liza" and wachtwoord == "ten Hoven":
             (volgende_aanbiedersmenu())
-
-        # elif opmerking.config(text = "Ongeldig"):
-        #     aanbiedersmenu_openen()
+        elif opmerking.config(text = "Ongeldig"):
+            aanbiedersmenu_openen()
 
     def volgende_aanbiedersmenu():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)

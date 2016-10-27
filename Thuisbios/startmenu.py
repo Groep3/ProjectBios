@@ -176,6 +176,22 @@ def bezoekersmenu_openen():
 def aanbiedersmenu_openen():
     def aanbiedersmenu_sluiten():
         aanbiedersmenuscherm.withdraw()
+          
+    def inloggen():
+        text = naam_invullen.get()
+        wachtwoord = wachtwoord_invullen.get()
+
+        if text == "Maarten" and wachtwoord == "van Dijk":
+            (volgende_aanbiedersmenu())
+        elif text == "Florian" and wachtwoord == "Korzelius":
+            (volgende_aanbiedersmenu())
+        elif text == "Donald" and wachtwoord == "Hioe":
+            (volgende_aanbiedersmenu())
+        elif text == "Jody" and wachtwoord == "Schuller":
+            (volgende_aanbiedersmenu())
+        elif text == "Liza" and wachtwoord == "ten Hoven":
+            (volgende_aanbiedersmenu())   
+        
     def volgende_aanbiedersmenu():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
         volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
@@ -251,7 +267,7 @@ def aanbiedersmenu_openen():
     wachtwoord_invullen = Entry(master=aanbiedersmenuscherm)
     wachtwoord_invullen.pack(padx=10, pady=10)
 
-    submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(volgende_aanbiedersmenu,aanbiedersmenu_sluiten)) #naar volgende menu
+    submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(inloggen,aanbiedersmenu_sluiten)) #naar volgende menu
     submit.pack(side=RIGHT)
 
     terug = Button(master=aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_sluiten, venster_terug_openen))
