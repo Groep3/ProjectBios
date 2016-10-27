@@ -2,7 +2,7 @@ from tkinter import *
 
 from qrcode import *
 
-from Thuisbios.filmtotaaltoday import *
+from backup.filmtotaaltoday import *
 
 value = 'film'
 def combine_funcs(*funcs):

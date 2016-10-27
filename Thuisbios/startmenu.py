@@ -1,16 +1,60 @@
-import csv
 from tkinter import *
-from qrcode import *
-from Thuisbios.filmtotaaltoday import *
-
-with open('bezoekers.csv', 'r+') as bezoekerscsv:
-    writer = csv.writer(bezoekerscsv, delimiter=';')
-    writer.writerow(('naam', 'wachtwoord'))
-
-with open('aanbieders.csv', 'r+') as bezoekerscsv:
-    writer = csv.writer(bezoekerscsv, delimiter=';')
+from lezenenschrijven import *
 
 value = 'film'
+code = 0
+name = 0
+mail = 0
+
+def ticketsave():
+    import time
+    date = time.strftime('%d-%m-%Y', time.localtime())
+    naam = name
+    email = mail
+    film = value
+    codes = code
+    ticket =('{} {} {} {}\n'.format(codes,film, naam, email))
+    schijvenstring(ticket,'bezoekers'+ ' '+date+'.csv')
+
+def createqr():
+    import pyqrcode
+    import random
+    aanmeldcode = random.randrange(100000, 1000000)
+    global code
+    code = aanmeldcode
+    qrcode = pyqrcode.create('{}'.format(aanmeldcode), error='L', version=10)
+    qrcode.png('qrcode.png', scale=5)
+    print(aanmeldcode)
+    return(aanmeldcode)
+
+    #qrcode.show()
+
+def filmtotaaltoday():
+    import requests
+    import xmltodict
+    import time
+    date = time.strftime('%d-%m-%Y', time.localtime())
+    api_url = 'http://api.filmtotaal.nl/filmsoptv.xml?apikey=3yakjh3yeghyppmgt99azqkfjjfrundg&dag='+date+'&sorteer=0'
+    response = requests.get(api_url)
+    filmsXML = xmltodict.parse(response.text)
+
+    lst = []
+
+    for films in filmsXML['filmsoptv']['film']:
+        film = films['titel']
+        jaar = films['jaar']
+        duur = films['duur']
+        genre = films['genre']
+        synopsis = films['synopsis']
+        regisseur = films['regisseur']
+        cast = films['cast']
+        land = films['land']
+        cover = films['cover']
+
+        lst.append('{} ({})'.format(film, jaar))
+
+    return(lst)
+
 def combine_funcs(*funcs):
     def combined_func(*args, **kwargs):
         for f in funcs:
@@ -119,7 +163,7 @@ def bezoekersmenu_openen():
     selectButton = Button(master=bezoekersmenuscherm, text='Select', underline = 0,command=selection)
     selectButton.pack(padx=10, pady=5)
 
-    submit = Button(master=bezoekersmenuscherm, text='Submit',command=combine_funcs(volgende, bezoekersmenu_sluiten))
+    submit = Button(master=bezoekersmenuscherm, text='Submit',command=combine_funcs(volgende, bezoekersmenu_sluiten,ticketsave))
     submit.pack(side=RIGHT)
 
     terug = Button(master=bezoekersmenuscherm, text="Return", command=combine_funcs(bezoekersmenu_sluiten, venster_terug_openen))
