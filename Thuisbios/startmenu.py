@@ -264,7 +264,7 @@ def aanbiedersmenu_openen():
     wachtwoord = Label(master=aanbiedersmenuscherm,text='Wachtwoord')
     wachtwoord.pack()
 
-    wachtwoord_invullen = Entry(master=aanbiedersmenuscherm)
+    wachtwoord_invullen = Entry(master=aanbiedersmenuscherm,show="*")
     wachtwoord_invullen.pack(padx=10, pady=10)
 
     submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(inloggen,aanbiedersmenu_sluiten)) #naar volgende menu
