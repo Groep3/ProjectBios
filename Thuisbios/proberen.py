@@ -225,7 +225,7 @@ def aanbiedersmenu_openen():
 
     opmerking = Label(master=aanbiedersmenuscherm, text = "")
     opmerking.pack()
-    submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(inloggen(),aanbiedersmenu_sluiten)) #naar volgende menu
+    submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(inloggen,aanbiedersmenu_sluiten)) #naar volgende menu
     submit.pack(side=RIGHT)
 
 
