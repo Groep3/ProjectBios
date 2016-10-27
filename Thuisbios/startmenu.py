@@ -177,6 +177,10 @@ def bezoekersmenu_openen():
 def aanbiedersmenu_openen():
     def aanbiedersmenu_sluiten():
         aanbiedersmenuscherm.withdraw()
+    def selection():
+        global value
+        value = lb1.selection_get()
+        return(value)
           
     def inloggen():
         text = naam_invullen.get()
@@ -512,6 +516,19 @@ def aanbiedersmenu_openen():
 
     wachtwoord_invullen = Entry(master=aanbiedersmenuscherm,show="*")
     wachtwoord_invullen.pack(padx=10, pady=10)
+
+    lb1 = Listbox(master=aanbiedersmenuscherm, width=50, height=10, selectmode=MULTIPLE)
+    place = 0
+    while place < len(filmtotaaltoday()):
+        indx = 1
+        lb1.insert(indx, filmtotaaltoday()[place])
+        place = place+1
+        indx = indx+1
+    lb1.pack()
+
+    selectButton = Button(master=aanbiedersmenuscherm, text='Select', underline = 0,command=selection)
+    selectButton.pack(padx=10, pady=5)
+
 
     submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(inloggen,aanbiedersmenu_sluiten)) #naar volgende menu
     submit.pack(side=RIGHT)
