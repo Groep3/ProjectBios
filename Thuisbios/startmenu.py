@@ -182,17 +182,258 @@ def aanbiedersmenu_openen():
         wachtwoord = wachtwoord_invullen.get()
 
         if text == "Maarten" and wachtwoord == "van Dijk":
-            (volgende_aanbiedersmenu())
+            (volgende_aanbiedersmenu_Maarten())
         elif text == "Florian" and wachtwoord == "Korzelius":
-            (volgende_aanbiedersmenu())
+            (volgende_aanbiedersmenu_Florian())
         elif text == "Donald" and wachtwoord == "Hioe":
-            (volgende_aanbiedersmenu())
+            (volgende_aanbiedersmenu_Donald())
         elif text == "Jody" and wachtwoord == "Schuller":
-            (volgende_aanbiedersmenu())
+            (volgende_aanbiedersmenu_Jody())
         elif text == "Liza" and wachtwoord == "ten Hoven":
-            (volgende_aanbiedersmenu())   
+            (volgende_aanbiedersmenu_Liza())
         
-    def volgende_aanbiedersmenu():
+    def volgende_aanbiedersmenu_Maarten():
+        volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
+        volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
+        def volgende_aanbiedersmenu_sluiten():
+            volgende_aanbiedersmenuscherm.withdraw()
+
+        gebruiker = Label(master=volgende_aanbiedersmenuscherm,text=naam_invullen.get())
+        gebruiker.pack()
+
+        overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
+        overzicht_van_nog_niet_aangeboden_films.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
+
+        #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
+
+        overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw aangeboden films')
+        overzicht_van_jouw_aangeboden_films.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
+
+        #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
+
+        overzicht_van_jouw_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw bezoekers')
+        overzicht_van_jouw_bezoekers.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
+
+        #jouw bezoekers
+
+
+        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
+        aanmeldcode_bezoekers.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
+
+        #begintijd - naam sorteren
+
+        terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
+        terug.pack(side=LEFT)
+
+        afsluiten = Button(master=volgende_aanbiedersmenuscherm, text="Afsluiten", command=volgende_aanbiedersmenu_sluiten)
+        afsluiten.pack(side=RIGHT)
+
+
+    def volgende_aanbiedersmenu_Florian():
+        volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
+        volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
+        def volgende_aanbiedersmenu_sluiten():
+            volgende_aanbiedersmenuscherm.withdraw()
+
+        gebruiker = Label(master=volgende_aanbiedersmenuscherm,text=naam_invullen.get())
+        gebruiker.pack()
+
+        overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
+        overzicht_van_nog_niet_aangeboden_films.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
+
+        #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
+
+        overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw aangeboden films')
+        overzicht_van_jouw_aangeboden_films.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
+
+        #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
+
+        overzicht_van_jouw_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw bezoekers')
+        overzicht_van_jouw_bezoekers.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
+
+        #jouw bezoekers
+
+
+        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
+        aanmeldcode_bezoekers.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
+
+        #begintijd - naam sorteren
+
+        terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
+        terug.pack(side=LEFT)
+
+        afsluiten = Button(master=volgende_aanbiedersmenuscherm, text="Afsluiten", command=volgende_aanbiedersmenu_sluiten)
+        afsluiten.pack(side=RIGHT)
+
+    def volgende_aanbiedersmenu_Donald():
+        volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
+        volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
+        def volgende_aanbiedersmenu_sluiten():
+            volgende_aanbiedersmenuscherm.withdraw()
+
+        gebruiker = Label(master=volgende_aanbiedersmenuscherm,text=naam_invullen.get())
+        gebruiker.pack()
+
+        overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
+        overzicht_van_nog_niet_aangeboden_films.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
+
+        #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
+
+        overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw aangeboden films')
+        overzicht_van_jouw_aangeboden_films.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
+
+        #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
+
+        overzicht_van_jouw_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw bezoekers')
+        overzicht_van_jouw_bezoekers.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
+
+        #jouw bezoekers
+
+
+        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
+        aanmeldcode_bezoekers.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
+
+        #begintijd - naam sorteren
+
+        terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
+        terug.pack(side=LEFT)
+
+        afsluiten = Button(master=volgende_aanbiedersmenuscherm, text="Afsluiten", command=volgende_aanbiedersmenu_sluiten)
+        afsluiten.pack(side=RIGHT)
+
+    def volgende_aanbiedersmenu_Jody():
+        volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
+        volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
+        def volgende_aanbiedersmenu_sluiten():
+            volgende_aanbiedersmenuscherm.withdraw()
+
+        gebruiker = Label(master=volgende_aanbiedersmenuscherm,text=naam_invullen.get())
+        gebruiker.pack()
+
+        overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
+        overzicht_van_nog_niet_aangeboden_films.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
+
+        #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
+
+        overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw aangeboden films')
+        overzicht_van_jouw_aangeboden_films.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        place = 0
+        while place < len(filmtotaaltoday()):
+            indx = 1
+            lb1.insert(indx, filmtotaaltoday()[place])
+            place = place+1
+            indx = indx+1
+        lb1.pack()
+
+        #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
+
+        overzicht_van_jouw_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw bezoekers')
+        overzicht_van_jouw_bezoekers.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
+
+        #jouw bezoekers
+
+
+        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
+        aanmeldcode_bezoekers.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1.pack()
+
+        #begintijd - naam sorteren
+
+        terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
+        terug.pack(side=LEFT)
+
+        afsluiten = Button(master=volgende_aanbiedersmenuscherm, text="Afsluiten", command=volgende_aanbiedersmenu_sluiten)
+        afsluiten.pack(side=RIGHT)
+
+    def volgende_aanbiedersmenu_Liza():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
         volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
         def volgende_aanbiedersmenu_sluiten():
