@@ -1,5 +1,6 @@
 from tkinter import *
 from lezenenschrijven import *
+from tkinter.messagebox import showinfo
 
 value = 'film'
 code = 0
@@ -191,7 +192,11 @@ def aanbiedersmenu_openen():
             (volgende_aanbiedersmenu_Jody())
         elif text == "Liza" and wachtwoord == "ten Hoven":
             (volgende_aanbiedersmenu_Liza())
-        
+        else:
+            bericht = 'Ongeldige Gebruikersnaam of wachtwoord'
+            showinfo(title='Foutmelding', message=bericht)
+            aanbiedersmenu_openen()
+
     def volgende_aanbiedersmenu_Maarten():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
         volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
