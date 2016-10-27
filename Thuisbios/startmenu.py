@@ -21,6 +21,29 @@ def venster_afsluiten():
 
     startscherm.withdraw()
 
+def venster_terug_openen():
+
+    def venster_terug_sluiten():
+
+        startscherm_terug.withdraw()
+
+    startscherm_terug = Toplevel(startscherm)
+    startscherm_terug.title('startscherm')
+
+    label = Label(master=startscherm_terug, text='Inlogscherm', height=2)
+    label.pack()
+
+    aanbieder = Button(master=startscherm_terug, text="Inloggen als aanbieder", command=combine_funcs(venster_terug_sluiten, aanbiedersmenu_openen))
+    aanbieder.pack(padx=10, pady=10)
+
+    bezoeker = Button(master=startscherm_terug, text="Inloggen als bezoeker", command=combine_funcs(venster_terug_sluiten, bezoekersmenu_openen))
+    bezoeker.pack(padx=10, pady=10)
+
+    afsluiten = Button(master=startscherm_terug, text="Afsluiten", command=venster_terug_sluiten)
+    afsluiten.pack(padx=20, pady=20)
+
+
+
 
 def bezoekersmenu_openen():
     def bezoekersmenu_sluiten():
@@ -97,13 +120,13 @@ def bezoekersmenu_openen():
     selectButton.pack(padx=10, pady=5)
 
     submit = Button(master=bezoekersmenuscherm, text='Submit',command=combine_funcs(volgende, bezoekersmenu_sluiten))
-    submit.pack(side=RIGHT, pady=40)
+    submit.pack(side=RIGHT)
 
-    terug = Button(master=bezoekersmenuscherm, text="return", command=combine_funcs(bezoekersmenu_sluiten)) #nieuwe functie toevoegen?
-    terug.pack(side=LEFT, pady=20)
+    terug = Button(master=bezoekersmenuscherm, text="Return", command=combine_funcs(bezoekersmenu_sluiten, venster_terug_openen))
+    terug.pack(side=LEFT)
 
     afsluiten = Button(master=bezoekersmenuscherm, text="Afsluiten", command=bezoekersmenu_sluiten)
-    afsluiten.pack(side=BOTTOM, pady=20)
+    afsluiten.pack(side=BOTTOM)
 
 
 def aanbiedersmenu_openen():
@@ -187,12 +210,12 @@ def aanbiedersmenu_openen():
     submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(volgende_aanbiedersmenu,aanbiedersmenu_sluiten)) #naar volgende menu
     submit.pack(side=RIGHT)
 
-    terug = Button(master=aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_sluiten)) # nieuwe functie toevoegen?
-    terug.pack(side=LEFT, pady=20)
+    terug = Button(master=aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_sluiten, venster_terug_openen))
+    terug.pack(side=LEFT)
 
 
     afsluiten = Button(master=aanbiedersmenuscherm, text="afsluiten", command=aanbiedersmenu_sluiten)
-    afsluiten.pack(pady=20)
+    afsluiten.pack(side=BOTTOM)
 
 startscherm = Tk()
 
