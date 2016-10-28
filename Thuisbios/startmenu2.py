@@ -213,25 +213,26 @@ def aanbiedersmenu_openen():
         overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
         overzicht_van_nog_niet_aangeboden_films.pack()
 
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10, selectmode= MULTIPLE)
         lst = lezen('mogelijke films'+ ' '+date+'.csv')
-        for line in lst:
-            lb1.insert(0,line)
-        lb1.pack()
-
-        #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
-
-        overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw aangeboden films')
-        overzicht_van_jouw_aangeboden_films.pack()
-
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10, selectmode=MULTIPLE)
-        lst = lezen('aanbiedingMaarten'+ ' '+date+'.csv')
         for line in lst:
             lb1.insert(0,line)
         lb1.pack()
 
         selectButton = Button(master=volgende_aanbiedersmenuscherm, text='Select', underline = 0,command=selection)
         selectButton.pack(padx=10, pady=5)
+
+        #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
+
+        overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw aangeboden films')
+        overzicht_van_jouw_aangeboden_films.pack()
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lst = lezen('aanbiedingMaarten'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
+        lb1.pack()
+
 
         #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
