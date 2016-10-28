@@ -200,6 +200,10 @@ def aanbiedersmenu_openen():
     def volgende_aanbiedersmenu_Maarten():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
         volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
+        def selection():
+            global value
+            value = lb1.selection_get()
+            return(value)
         def volgende_aanbiedersmenu_sluiten():
             volgende_aanbiedersmenuscherm.withdraw()
 
@@ -220,11 +224,14 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van uw aangeboden films')
         overzicht_van_jouw_aangeboden_films.pack()
 
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10, selectmode=MULTIPLE)
         lst = lezen('aanbiedingMaarten'+ ' '+date+'.csv')
         for line in lst:
             lb1.insert(0,line)
         lb1.pack()
+
+        selectButton = Button(master=volgende_aanbiedersmenuscherm, text='Select', underline = 0,command=selection)
+        selectButton.pack(padx=10, pady=5)
 
         #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
 

@@ -9,13 +9,16 @@ mail = 0
 
 def ticketsave():
     import time
+    import csv
     date = time.strftime('%d-%m-%Y', time.localtime())
     naam = name
     email = mail
     film = value
     codes = code
     ticket =('{} {} {} {}\n'.format(codes,film, naam, email))
-    schijvenstring(ticket,'bezoekers'+ ' '+date+'.csv')
+    with open('tickets.csv','w', newline='') as f:
+        writer = csv.writer(f, delimiter=';')
+        writer.writerow('{}, bezoekers {}'.format(ticket, date))
 
 def createqr():
     import pyqrcode
@@ -132,6 +135,7 @@ def bezoekersmenu_openen():
 
     bezoekersmenuscherm = Toplevel(startscherm)
     bezoekersmenuscherm.title('Bezoekersmenu')
+
     naam = Label(master=bezoekersmenuscherm,text='Naam')
     naam.pack()
 
@@ -560,3 +564,4 @@ afsluiten = Button(master=startscherm, text="Afsluiten", command=venster_afsluit
 afsluiten.pack(padx=20, pady=20)
 
 startscherm.mainloop()
+

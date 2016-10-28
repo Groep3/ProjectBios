@@ -9,7 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/backup" />
       <excludeFolder url="file://$MODULE_DIR$/backup/Mogelijke films" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.5.2 (C:\Users\slettebak\AppData\Local\Programs\Python\Python35-32\python.exe)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.5.2 (C:\Users\donal\AppData\Local\Programs\Python\Python35-32\python.exe)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">
