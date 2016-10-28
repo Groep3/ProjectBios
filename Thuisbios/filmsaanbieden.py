@@ -1,7 +1,7 @@
 from lezenenschrijven import *
 import time
 date = time.strftime('%d-%m-%Y', time.localtime())
-database = 'C:/Users/slettebak/test2/thuisbios/mogelijke films/mogelijke films'+ ' '+date+'.csv'
+database = 'mogelijke films'+ ' '+date+'.csv'
 database2 = 'aanbiedingMaarten' + ' '+date+'.csv'
 
 
@@ -25,6 +25,6 @@ def change(database,aanbiederdata):
        if line not in inhoud2:
             lst.append(line)
 
-    schijvenlijst(lst,'C:/Users/slettebak/test2/thuisbios/mogelijke films/mogelijke films'+ ' '+date+'.csv')
+    schijvenlijst(lst,'mogelijke films'+ ' '+date+'.csv')
 
 change(database,database2)
