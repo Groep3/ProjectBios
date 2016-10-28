@@ -16,8 +16,19 @@ def ticketsave():
     email = mail
     film = value
     codes = code
-    ticket =('{} {} {} {}\n'.format(codes,film, naam, email))
-    schijvenstring(ticket,'bezoekers'+ ' '+date+'.csv')
+    ticket =('{} {} {} {}'.format(codes, naam, email, film,))
+    if 'Aanbieder Maarten:' in ticket:
+        schijvenstring(ticket,'GastenMaarten'+ ' '+date+'.csv')
+    elif 'Aanbieder Donald:' in ticket:
+        schijvenstring(ticket,'GastenDonald'+ ' '+date+'.csv')
+    elif 'Aanbieder Jody:' in ticket:
+        schijvenstring(ticket,'GastenJody'+ ' '+date+'.csv')
+    elif 'Aanbieder Liza:' in ticket:
+        schijvenstring(ticket,'GastenLiza'+ ' '+date+'.csv')
+    elif 'Aanbieder Florian:' in ticket:
+        schijvenstring(ticket,'GastenFlorian'+ ' '+date+'.csv')
+
+
 
 def createqr():
     import pyqrcode
@@ -89,6 +100,30 @@ def venster_terug_openen():
     afsluiten = Button(master=startscherm_terug, text="Afsluiten", command=venster_terug_sluiten)
     afsluiten.pack(padx=20, pady=20)
 
+def aanbodfilms():
+    lst = []
+    inhoud = lezen('aanbiedingMaarten'+' ' + date +'.csv')
+    for line in inhoud:
+        lst.append('Aanbieder Maarten: {}'.format(line))
+
+    inhoud1 = lezen('aanbiedingJody'+' ' + date +'.csv')
+    for line in  inhoud1:
+        lst.append('Aanbieder Jody: {}'.format(line))
+
+    inhoud2 = lezen('aanbiedingDonald'+' ' + date +'.csv')
+    for line in inhoud2:
+        lst.append('Aanbieder Donald: {}'.format(line))
+
+    inhoud3 = lezen('aanbiedingLiza'+' ' + date +'.csv')
+    for line in inhoud3:
+        lst.append('Aanbieder Liza: {}'.format(line))
+
+    inhoud5 = lezen('aanbiedingFlorian'+' ' + date +'.csv')
+    for line in inhoud5:
+        lst.append('Aanbieder Florian: {}'.format(line))
+
+    schijvenlijst(lst, 'aanbodfilms'+' ' + date +'.csv')
+
 
 
 
@@ -154,12 +189,10 @@ def bezoekersmenu_openen():
         value = lb1.selection_get()
         return(value)
 
-    lb1 = Listbox(master=bezoekersmenuscherm, width=50, height=10)
-    place = 0
-    while place < len(filmtotaaltoday()):
-        indx = 1
-        lb1.insert(indx, filmtotaaltoday()[place])
-        place = place+1
+    lb1 = Listbox(master=bezoekersmenuscherm, width=80, height=10)
+    lst = lezen('aanbodfilms'+' ' + date +'.csv')
+    for line in lst:
+        lb1.insert(0,line)
     lb1.pack()
 
     selectButton = Button(master=bezoekersmenuscherm, text='Select', underline = 0,command=selection)
@@ -271,15 +304,6 @@ def aanbiedersmenu_openen():
 
         #jouw bezoekers
 
-
-        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
-        aanmeldcode_bezoekers.pack()
-
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        lb1.pack()
-
-        #begintijd - naam sorteren
-
         terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
         terug.pack(side=LEFT)
 
@@ -358,15 +382,6 @@ def aanbiedersmenu_openen():
         lb1.pack()
 
         #jouw bezoekers
-
-
-        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
-        aanmeldcode_bezoekers.pack()
-
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        lb1.pack()
-
-        #begintijd - naam sorteren
 
         terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
         terug.pack(side=LEFT)
@@ -447,15 +462,6 @@ def aanbiedersmenu_openen():
 
         #jouw bezoekers
 
-
-        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
-        aanmeldcode_bezoekers.pack()
-
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        lb1.pack()
-
-        #begintijd - naam sorteren
-
         terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
         terug.pack(side=LEFT)
 
@@ -534,15 +540,6 @@ def aanbiedersmenu_openen():
         lb1.pack()
 
         #jouw bezoekers
-
-
-        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
-        aanmeldcode_bezoekers.pack()
-
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        lb1.pack()
-
-        #begintijd - naam sorteren
 
         terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
         terug.pack(side=LEFT)
@@ -623,15 +620,6 @@ def aanbiedersmenu_openen():
 
         #jouw bezoekers
 
-
-        aanmeldcode_bezoekers = Label(master=volgende_aanbiedersmenuscherm,text='De aanmeldcodes van uw bezoekers')
-        aanmeldcode_bezoekers.pack()
-
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        lb1.pack()
-
-        #begintijd - naam sorteren
-
         terug = Button(master=volgende_aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_openen, volgende_aanbiedersmenu_sluiten))
         terug.pack(side=LEFT)
 
@@ -672,7 +660,7 @@ label.pack()
 aanbieder = Button(master=startscherm, text="Inloggen als aanbieder", command=combine_funcs(venster_afsluiten, aanbiedersmenu_openen))
 aanbieder.pack(padx=10, pady=10)
 
-bezoeker = Button(master=startscherm, text="Inloggen als bezoeker", command=combine_funcs(venster_afsluiten, bezoekersmenu_openen))
+bezoeker = Button(master=startscherm, text="Inloggen als bezoeker", command=combine_funcs(venster_afsluiten,aanbodfilms, bezoekersmenu_openen))
 bezoeker.pack(padx=10, pady=10)
 
 afsluiten = Button(master=startscherm, text="Afsluiten", command=venster_afsluiten)
