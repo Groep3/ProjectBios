@@ -2,7 +2,7 @@ from lezenenschrijven import *
 import time
 date = time.strftime('%d-%m-%Y', time.localtime())
 database = 'mogelijke films'+ ' '+date+'.csv'
-database2 = 'aanbiedingMaarten' + ' '+date+'.csv'
+database2 = 'gekozenaanbiedingMaarten' + ' '+date+'.csv'
 
 
 def filmsaanbieden(database,databasekeuzes,aanbieder):
@@ -14,7 +14,7 @@ def filmsaanbieden(database,databasekeuzes,aanbieder):
         if line in inhoud:
             lst.append(line)
 
-    schijvenlijst(lst,'aanbieding'+aanbieder+ ' '+date+'.csv')
+    appendlijst(lst,'aanbieding'+aanbieder+ ' '+date+'.csv')
 
 def change(database,aanbiederdata):
     inhoud = lezen(database)

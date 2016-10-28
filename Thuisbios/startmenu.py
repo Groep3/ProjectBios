@@ -189,7 +189,7 @@ def aanbiedersmenu_openen():
         global value
         value = lb1.selection_get()
         return(value)
-          
+
     def inloggen():
         text = naam_invullen.get()
         wachtwoord = wachtwoord_invullen.get()

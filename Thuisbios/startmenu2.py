@@ -1,6 +1,8 @@
 from tkinter import *
+from filmsaanbieden import *
 from lezenenschrijven import *
 from tkinter.messagebox import showinfo
+
 import time
 
 date = time.strftime('%d-%m-%Y', time.localtime())
@@ -158,7 +160,6 @@ def bezoekersmenu_openen():
         indx = 1
         lb1.insert(indx, filmtotaaltoday()[place])
         place = place+1
-        indx = indx+1
     lb1.pack()
 
     selectButton = Button(master=bezoekersmenuscherm, text='Select', underline = 0,command=selection)
@@ -200,10 +201,7 @@ def aanbiedersmenu_openen():
     def volgende_aanbiedersmenu_Maarten():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
         volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
-        def selection():
-            global value
-            value = lb1.selection_get()
-            return(value)
+
         def volgende_aanbiedersmenu_sluiten():
             volgende_aanbiedersmenuscherm.withdraw()
 
@@ -213,13 +211,39 @@ def aanbiedersmenu_openen():
         overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
         overzicht_van_nog_niet_aangeboden_films.pack()
 
+        def gekozenaanbiedingen():
+            value = lb1.selection_get()
+            schijvenlijst(value,'gekozenaanbiedingenMaarten' + ' '+date+'.csv')
+
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10, selectmode= MULTIPLE)
         lst = lezen('mogelijke films'+ ' '+date+'.csv')
         for line in lst:
             lb1.insert(0,line)
         lb1.pack()
 
-        selectButton = Button(master=volgende_aanbiedersmenuscherm, text='Select', underline = 0,command=selection)
+        def filmsaanbieden():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('gekozenaanbiedingenMaarten'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud2:
+                if line in inhoud:
+                    lst.append(line)
+
+            appendlijst(lst,'aanbiedingMaarten'+ ' '+date+'.csv')
+
+        def change():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('aanbiedingMaarten'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud:
+               if line not in inhoud2:
+                    lst.append(line)
+
+            schijvenlijst(lst,'mogelijke films'+ ' '+date+'.csv')
+
+        selectButton = Button(master=volgende_aanbiedersmenuscherm, text='Submit', underline = 0,command=combine_funcs(gekozenaanbiedingen,filmsaanbieden,change,volgende_aanbiedersmenu_sluiten,volgende_aanbiedersmenu_Maarten))
         selectButton.pack(padx=10, pady=5)
 
         #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
@@ -262,10 +286,10 @@ def aanbiedersmenu_openen():
         afsluiten = Button(master=volgende_aanbiedersmenuscherm, text="Afsluiten", command=volgende_aanbiedersmenu_sluiten)
         afsluiten.pack(side=RIGHT)
 
-
     def volgende_aanbiedersmenu_Florian():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
         volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
+
         def volgende_aanbiedersmenu_sluiten():
             volgende_aanbiedersmenuscherm.withdraw()
 
@@ -275,14 +299,40 @@ def aanbiedersmenu_openen():
         overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
         overzicht_van_nog_niet_aangeboden_films.pack()
 
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        def gekozenaanbiedingen():
+            value = lb1.selection_get()
+            schijvenlijst(value,'gekozenaanbiedingenFlorian' + ' '+date+'.csv')
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10, selectmode= MULTIPLE)
+        lst = lezen('mogelijke films'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
+
+        def filmsaanbieden():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('gekozenaanbiedingenflorian'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud2:
+                if line in inhoud:
+                    lst.append(line)
+
+            appendlijst(lst,'aanbiedingFlorian'+ ' '+date+'.csv')
+
+        def change():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('aanbiedingFlorian'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud:
+               if line not in inhoud2:
+                    lst.append(line)
+
+            schijvenlijst(lst,'mogelijke films'+ ' '+date+'.csv')
+
+        selectButton = Button(master=volgende_aanbiedersmenuscherm, text='Submit', underline = 0,command=combine_funcs(gekozenaanbiedingen,filmsaanbieden,change,volgende_aanbiedersmenu_sluiten,volgende_aanbiedersmenu_Maarten))
+        selectButton.pack(padx=10, pady=5)
 
         #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
@@ -290,13 +340,11 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        lst = lezen('aanbiedingFlorian'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
+
 
         #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
@@ -304,6 +352,9 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_bezoekers.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lst = lezen('GastenFlorian'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
 
         #jouw bezoekers
@@ -326,6 +377,7 @@ def aanbiedersmenu_openen():
     def volgende_aanbiedersmenu_Donald():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
         volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
+
         def volgende_aanbiedersmenu_sluiten():
             volgende_aanbiedersmenuscherm.withdraw()
 
@@ -335,14 +387,40 @@ def aanbiedersmenu_openen():
         overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
         overzicht_van_nog_niet_aangeboden_films.pack()
 
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        def gekozenaanbiedingen():
+            value = lb1.selection_get()
+            schijvenlijst(value,'gekozenaanbiedingenDonald' + ' '+date+'.csv')
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10, selectmode= MULTIPLE)
+        lst = lezen('mogelijke films'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
+
+        def filmsaanbieden():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('gekozenaanbiedingenDonald'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud2:
+                if line in inhoud:
+                    lst.append(line)
+
+            appendlijst(lst,'aanbiedingDonald'+ ' '+date+'.csv')
+
+        def change():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('aanbiedingDonald'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud:
+               if line not in inhoud2:
+                    lst.append(line)
+
+            schijvenlijst(lst,'mogelijke films'+ ' '+date+'.csv')
+
+        selectButton = Button(master=volgende_aanbiedersmenuscherm, text='Submit', underline = 0,command=combine_funcs(gekozenaanbiedingen,filmsaanbieden,change,volgende_aanbiedersmenu_sluiten,volgende_aanbiedersmenu_Maarten))
+        selectButton.pack(padx=10, pady=5)
 
         #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
@@ -350,13 +428,11 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        lst = lezen('aanbiedingDonald'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
+
 
         #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
@@ -364,6 +440,9 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_bezoekers.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lst = lezen('GastenDonald'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
 
         #jouw bezoekers
@@ -386,6 +465,7 @@ def aanbiedersmenu_openen():
     def volgende_aanbiedersmenu_Jody():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
         volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
+
         def volgende_aanbiedersmenu_sluiten():
             volgende_aanbiedersmenuscherm.withdraw()
 
@@ -395,14 +475,40 @@ def aanbiedersmenu_openen():
         overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
         overzicht_van_nog_niet_aangeboden_films.pack()
 
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        def gekozenaanbiedingen():
+            value = lb1.selection_get()
+            schijvenlijst(value,'gekozenaanbiedingenJody' + ' '+date+'.csv')
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10, selectmode= MULTIPLE)
+        lst = lezen('mogelijke films'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
+
+        def filmsaanbieden():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('gekozenaanbiedingenJody'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud2:
+                if line in inhoud:
+                    lst.append(line)
+
+            appendlijst(lst,'aanbiedingMaarten'+ ' '+date+'.csv')
+
+        def change():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('aanbiedingJody'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud:
+               if line not in inhoud2:
+                    lst.append(line)
+
+            schijvenlijst(lst,'mogelijke films'+ ' '+date+'.csv')
+
+        selectButton = Button(master=volgende_aanbiedersmenuscherm, text='Submit', underline = 0,command=combine_funcs(gekozenaanbiedingen,filmsaanbieden,change,volgende_aanbiedersmenu_sluiten,volgende_aanbiedersmenu_Maarten))
+        selectButton.pack(padx=10, pady=5)
 
         #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
@@ -410,13 +516,11 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        lst = lezen('aanbiedingJody'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
+
 
         #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
@@ -424,6 +528,9 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_bezoekers.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lst = lezen('GastenJody'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
 
         #jouw bezoekers
@@ -446,6 +553,7 @@ def aanbiedersmenu_openen():
     def volgende_aanbiedersmenu_Liza():
         volgende_aanbiedersmenuscherm = Toplevel(aanbiedersmenuscherm)
         volgende_aanbiedersmenuscherm.title('Overzicht van gegevens')
+
         def volgende_aanbiedersmenu_sluiten():
             volgende_aanbiedersmenuscherm.withdraw()
 
@@ -455,14 +563,40 @@ def aanbiedersmenu_openen():
         overzicht_van_nog_niet_aangeboden_films = Label(master=volgende_aanbiedersmenuscherm,text='Een overzicht van nog niet aangeboden films door een andere aanbieder')
         overzicht_van_nog_niet_aangeboden_films.pack()
 
-        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        def gekozenaanbiedingen():
+            value = lb1.selection_get()
+            schijvenlijst(value,'gekozenaanbiedingenLiza' + ' '+date+'.csv')
+
+        lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10, selectmode= MULTIPLE)
+        lst = lezen('mogelijke films'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
+
+        def filmsaanbieden():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('gekozenaanbiedingenLiza'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud2:
+                if line in inhoud:
+                    lst.append(line)
+
+            appendlijst(lst,'aanbiedingLiza'+ ' '+date+'.csv')
+
+        def change():
+            inhoud = lezen('mogelijke films'+' '+date+'.csv')
+            inhoud2 = lezen('aanbiedingLiza'+' '+date+'.csv')
+
+            lst = []
+            for line in inhoud:
+               if line not in inhoud2:
+                    lst.append(line)
+
+            schijvenlijst(lst,'mogelijke films'+ ' '+date+'.csv')
+
+        selectButton = Button(master=volgende_aanbiedersmenuscherm, text='Submit', underline = 0,command=combine_funcs(gekozenaanbiedingen,filmsaanbieden,change,volgende_aanbiedersmenu_sluiten,volgende_aanbiedersmenu_Maarten))
+        selectButton.pack(padx=10, pady=5)
 
         #alle films die nog niet worden aangeboden door aanbieders. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
@@ -470,13 +604,11 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_aangeboden_films.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
-        place = 0
-        while place < len(filmtotaaltoday()):
-            indx = 1
-            lb1.insert(indx, filmtotaaltoday()[place])
-            place = place+1
-            indx = indx+1
+        lst = lezen('aanbiedingLiza'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
+
 
         #alle films die je aanbiedt. TOT NU TOE ALLE FILMS DIE ER ZIJN
 
@@ -484,6 +616,9 @@ def aanbiedersmenu_openen():
         overzicht_van_jouw_bezoekers.pack()
 
         lb1 = Listbox(master=volgende_aanbiedersmenuscherm, width=50, height=10)
+        lst = lezen('GastenLiza'+ ' '+date+'.csv')
+        for line in lst:
+            lb1.insert(0,line)
         lb1.pack()
 
         #jouw bezoekers

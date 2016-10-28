@@ -3,6 +3,11 @@ def schijvenlijst(lst,bestand):
     bestand.writelines(lst)
     bestand.close()
 
+def appendlijst(lst,bestand):
+    bestand = open(bestand, 'a')
+    bestand.writelines(lst)
+    bestand.close()
+
 def schijvenstring(str,bestand):
     bestand = open(bestand, 'a')
     bestand.write(str)
