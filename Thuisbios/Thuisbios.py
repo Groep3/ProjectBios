@@ -142,9 +142,13 @@ def bezoekersmenu_openen():
         label.pack()
 
         label = Label(master=ticket, text=('Naam:\n {}'.format(naam_invullen.get())))
+        global name
+        name = str(naam_invullen.get())
         label.pack()
 
         label = Label(master=ticket, text=('Uw E-mail:\n {}'.format(mail_invullen.get())))
+        global mail
+        mail = str(mail_invullen.get())
         label.pack()
 
         label = Label(master=ticket, text=('Film:\n{}'.format(value)))
@@ -195,17 +199,11 @@ def bezoekersmenu_openen():
         lb1.insert(0,line)
     lb1.pack()
 
-    selectButton = Button(master=bezoekersmenuscherm, text='Select', underline = 0,command=selection)
-    selectButton.pack(padx=10, pady=5)
-
-    submit = Button(master=bezoekersmenuscherm, text='Submit',command=combine_funcs(volgende, bezoekersmenu_sluiten,ticketsave))
+    submit = Button(master=bezoekersmenuscherm, text='Submit',command=combine_funcs(selection,volgende, bezoekersmenu_sluiten,ticketsave, ))
     submit.pack(side=RIGHT)
 
-    terug = Button(master=bezoekersmenuscherm, text="Return", command=combine_funcs(bezoekersmenu_sluiten, venster_terug_openen))
-    terug.pack(side=LEFT)
-
     afsluiten = Button(master=bezoekersmenuscherm, text="Afsluiten", command=bezoekersmenu_sluiten)
-    afsluiten.pack(side=BOTTOM)
+    afsluiten.pack(side=LEFT)
 
 
 def aanbiedersmenu_openen():
@@ -641,15 +639,11 @@ def aanbiedersmenu_openen():
     wachtwoord_invullen = Entry(master=aanbiedersmenuscherm,show="*")
     wachtwoord_invullen.pack(padx=10, pady=10)
 
-    submit = Button(master=aanbiedersmenuscherm, text="submit", command=combine_funcs(inloggen,aanbiedersmenu_sluiten)) #naar volgende menu
+    submit = Button(master=aanbiedersmenuscherm, text="Login", command=combine_funcs(inloggen,aanbiedersmenu_sluiten)) #naar volgende menu
     submit.pack(side=RIGHT)
 
-    terug = Button(master=aanbiedersmenuscherm, text="return", command=combine_funcs(aanbiedersmenu_sluiten, venster_terug_openen))
-    terug.pack(side=LEFT)
-
-
     afsluiten = Button(master=aanbiedersmenuscherm, text="afsluiten", command=aanbiedersmenu_sluiten)
-    afsluiten.pack(side=BOTTOM)
+    afsluiten.pack(side=LEFT)
 
 startscherm = Tk()
 
