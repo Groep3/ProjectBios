@@ -27,4 +27,4 @@ def change(database,aanbiederdata):
 
     schijvenlijst(lst,'mogelijke films'+ ' '+date+'.csv')
 
-change(database,database2)
+
